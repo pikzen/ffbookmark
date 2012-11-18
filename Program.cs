@@ -11,22 +11,7 @@ namespace ffbookmark
 {
     class Program
     {
-        static T Deserialize<T>(string path) where T : new()
-        {
-            DataContractJsonSerializer jss = new DataContractJsonSerializer(typeof(T));
-            if (!File.Exists(path))
-                File.Create(path).Close();
-
-
-            using (StreamReader sr = new StreamReader(path))
-            using (Stream ms = new MemoryStream(Encoding.UTF8.GetBytes(sr.ReadToEnd())))
-            {
-                if (ms.Length > 0)
-                    return (T)jss.ReadObject(ms);
-                else
-                    return new T();
-            }
-        }
+        
 
         static void Serialize<T>(T data, string path)
         {
