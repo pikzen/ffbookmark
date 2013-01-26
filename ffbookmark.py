@@ -55,19 +55,12 @@ def main(filepath):
 					pass
 				items["children"][3]["children"].append(bookmark)	
 
-			json_rep = json.dumps(items, indent = 1)
 			# Apparently, the max buffer size is 204.800 characters. Let's split that shit
 			# Addendum : apparently, 200kb is the max filesize. not good. 
-			num_steps = len(json_rep) / 102400
-			print "Writing to file in " + str(num_steps) + " steps"
 			
 			with open('out.json', 'w') as f:
-				f.truncate(102400)
-				for i in range(0, num_steps):
-					print "Pass " + str(i)
-					f.write(json_rep[i * 102400:(len(json_rep) - i * 102400) - 1])
-					f.flush()
-
+				json.dump(items, f)
+				
 			print "Exported successfully"
 	except IOError as e:
 		print e
