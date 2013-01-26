@@ -63,7 +63,8 @@ def main(filepath):
 			# Addendum : apparently, 200kb is the max filesize. not good. 
 			
 			with open('out.json', 'w') as f:
-				json.dump(items, f)
+				json.dump(items, f, indent = 1)
+				f.write('}')
 
 			print "Exported successfully"
 	except IOError as e:
