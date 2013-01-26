@@ -34,7 +34,11 @@ def main(filepath):
 				bookmark["dateAdded"] = 1
 				bookmark["lastModified"] = 1
 				bookmark["type"] = "text/x-moz-place"
-				bookmark["uri"] = link.get('href')
+				uri = link.get('href')
+				if uri == "?":
+					bookmark['uri'] = "about:blank"
+				else:
+					bookmark['uri'] = uri
 				id += 1
 
 				try:
@@ -60,7 +64,7 @@ def main(filepath):
 			
 			with open('out.json', 'w') as f:
 				json.dump(items, f)
-				
+
 			print "Exported successfully"
 	except IOError as e:
 		print e
