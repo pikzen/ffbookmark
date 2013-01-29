@@ -36,12 +36,8 @@ def main(filepath):
 				bookmark["type"] = "text/x-moz-place"
 				uri = link.get('href')
 				# Shaarli's self links are totally fucked up : ?xGRpkrp
-				# But we can't simply oust links containing '?'s, because
-				# php uses it, and pretty much everything does
-				# however, if there's not dot, we can assume it's a 
-				# Shaarli link.
-				# If it's not, well too bad, false positive.
-				if "?" in uri and not '.' in uri:
+				# We're going to assume that any link starting with a ? is a shaarli link
+				if uri[0] == '?':
 					bookmark['uri'] = "about:blank"
 				else:
 					bookmark['uri'] = uri
